@@ -1,64 +1,83 @@
+let playerScore = 0;
+let computerScore = 0;
+const choiceOptions = ["Rock","Paper","Scissors"];
 
 // Returns randomly rock, paper or scissors
 function getComputerChoice() {
-    let computerOptions = ["rock","paper","scissors"];
-    return computerOptions[Math.floor(Math.random() * computerOptions.length)];
+    
+    return choiceOptions[Math.floor(Math.random() * choiceOptions.length)];
 }
 
 function convertToTitle(string) {
-    return string.toLowerCase().charAt(0).toUpperCase() + string.slice(1);
+    string = string.toLowerCase();
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function playRound() {
-    let playerSelection = prompt("Rock, Paper or Scissors?: ");
-    let computerSelection = getComputerChoice();
+function playRound(playerSelection, computerSelection) {
 
-    convertToTitle(playerSelection);
-    convertToTitle(computerSelection);
-
-   
+    playerSelection = convertToTitle(playerSelection);
+    
     // Tie
     if (playerSelection === computerSelection) {
-        return 2;
+        return "It's a tie!";
     } 
     
     // Could optimize this
     // Player wins
     else if (playerSelection == "Rock" && computerSelection == "Scissors") {
-        return 0;
+        ++playerScore;
+        return "You Win! Rock beats Scissors";
     }
     else if (playerSelection == "Paper" && computerSelection == "Rock") {
-        return 0;
+        ++playerScore;
+        return "You Win! Paper beats Rock";
     }
     else if (playerSelection == "Scissors" && computerSelection == "Paper") {
-        return 0;
+        ++playerScore;
+        return "You Win! Scissors beats Paper";
     }
 
     // Computer wins
     else if (computerSelection == "Rock" && playerSelection == "Scissors") {
-        return 1;
+        ++computerScore;
+        return "You Lose! Rock beats Scissors"
     }
     else if (computerSelection == "Paper" && playerSelection == "Rock") {
-        return 1;
+        ++computerScore;
+        return "You Lose! Paper beats Rock"
     }
     else if (computerSelection == "Scissors" && playerSelection == "Paper") {
-        return 1;
+        ++computerScore;
+        return "You Lose! Scissors beats Paper"
     }
 
-    // Check who wins
-    // Print message like "You Lose! Paper beats Rock"
-    // Ties replay the round
+    else {
+        return "Invalid option!";
+    } 
+
   }
    
- 
-
-
-  console.log(playRound());
-
-
   function game() {
-  // Does a best of five games
-  // Keeps the score
-  // Print the result of each game
-  // Prints if you win or lose at the end
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = prompt("Rock, Paper or Scissors?: ");
+        let computerSelection = getComputerChoice();  
+
+        let gameResult = playRound(playerSelection, computerSelection);
+        console.log(gameResult);
+        
+        // Tie rounds are replayed
+        if (gameResult == "It's a tie!" || gameResult == "Invalid option!") {
+            --i; 
+        }
+  
+    }
+
+    if (playerScore > computerScore) {
+        console.log("You win!");
+    }
+    else {
+        console.log("You Lose");
+    }
   }
+
+  game();
