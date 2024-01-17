@@ -1,24 +1,34 @@
 
 // Returns randomly rock, paper or scissors
 function getComputerChoice() {
-
     let computerOptions = ["rock","paper","scissors"];
-
-    // Returns a random option
     return computerOptions[Math.floor(Math.random() * computerOptions.length)];
 }
 
-function playRound(playerSelection, computerSelection) {
-    
-    // Compare the two values
+function convertToTitle(string) {
+    return string.toLowerCase().charAt(0).toUpperCase() + string.slice(1);
+}
+
+function playRound() {
+    let playerSelection = prompt("Rock, Paper or Scissors?: ");
+    let computerSelection = getComputerChoice();
+
+    convertToTitle(playerSelection);
+    convertToTitle(computerSelection);
+
+    // Tie
+    if (playerSelection === computerSelection) {
+        return 2;
+    }
     // Check who wins
     // Print message like "You Lose! Paper beats Rock"
     // Ties replay the round
   }
    
-  const playerSelection = "rock"; // use prompt
-  const computerSelection = getComputerChoice();
-  console.log(playRound(playerSelection, computerSelection));
+ 
+
+
+  console.log(playRound());
 
 
   function game() {
