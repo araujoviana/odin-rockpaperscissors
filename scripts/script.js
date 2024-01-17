@@ -1,11 +1,15 @@
 
+// Returns randomly rock, paper or scissors
 function getComputerChoice() {
-    // Returns randomly rock, paper or scissors
 
+    let computerOptions = ["rock","paper","scissors"];
+
+    // Returns a random option
+    return computerOptions[Math.floor(Math.random() * computerOptions.length)];
 }
 
 function playRound(playerSelection, computerSelection) {
-    // your code here!
+    
     // Compare the two values
     // Check who wins
     // Print message like "You Lose! Paper beats Rock"
