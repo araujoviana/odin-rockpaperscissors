@@ -100,6 +100,7 @@ function playRound(playerSelection, computerSelection = getComputerChoice()) {
   }
 
 function checkGameWinner() {
+    // Could also disable the buttons instead of removing the event listener
     if (playerScoreValue > 4) {
         resultDisplayGroup.textContent = 'The player wins!';
         rockButtonSelection.removeEventListener('click', playRock);
