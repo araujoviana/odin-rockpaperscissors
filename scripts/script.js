@@ -8,9 +8,13 @@ const rockButtonSelection = document.querySelector('#rockButton');
 const paperButtonSelection = document.querySelector('#paperButton');
 const scissorsButtonSelection = document.querySelector('#scissorsButton');
 
-rockButtonSelection.addEventListener('click', function() {playRound('Rock'); });
-paperButtonSelection.addEventListener('click', function() {playRound('Paper'); });
-scissorsButtonSelection.addEventListener('click', function() {playRound('Scissors'); });
+function playRock() { playRound('Rock'); }
+function playPaper() { playRound('Paper'); }
+function playScissors() { playRound('Scissors'); }
+
+rockButtonSelection.addEventListener('click', playRock);
+paperButtonSelection.addEventListener('click', playPaper);
+scissorsButtonSelection.addEventListener('click', playScissors);
 
 const resultDisplayGroup = document.querySelector('.resultGroup');
 
@@ -46,40 +50,47 @@ function playRound(playerSelection, computerSelection = getComputerChoice()) {
     else if (playerSelection == "Rock" && computerSelection == "Scissors") {
         ++playerScoreValue;
         updateDisplayedScores();
-        checkGameWinner();
-        resultDisplayGroup.textContent =  "You Win! Rock beats Scissors";
+        if (!(checkGameWinner())) {
+            resultDisplayGroup.textContent =  "You Win! Rock beats Scissors";
+        }
     }
     else if (playerSelection == "Paper" && computerSelection == "Rock") {
         ++playerScoreValue;
         updateDisplayedScores();
-        checkGameWinner();
-        resultDisplayGroup.textContent =  "You Win! Paper beats Rock";
+        if (!(checkGameWinner())) {
+            resultDisplayGroup.textContent =  "You Win! Paper beats Rock";
+        }
     }
     else if (playerSelection == "Scissors" && computerSelection == "Paper") {
         ++playerScoreValue;
         updateDisplayedScores();
-        checkGameWinner();
-        resultDisplayGroup.textContent =  "You Win! Scissors beats Paper";
+        if (!(checkGameWinner())) {
+            resultDisplayGroup.textContent =  "You Win! Scissors beats Paper";
+        }
     }
 
     // Computer wins
     else if (computerSelection == "Rock" && playerSelection == "Scissors") {
         ++computerScoreValue;
         updateDisplayedScores();
-        checkGameWinner();
-        resultDisplayGroup.textContent =  "You Lose! Rock beats Scissors";
+        if (!(checkGameWinner())) {
+            resultDisplayGroup.textContent =  "You Lose! Rock beats Scissors";
+        }
     }
     else if (computerSelection == "Paper" && playerSelection == "Rock") {
         ++computerScoreValue;
         updateDisplayedScores();
-        checkGameWinner();
-        resultDisplayGroup.textContent =  "You Lose! Paper beats Rock";
+        if (!(checkGameWinner())) {
+            resultDisplayGroup.textContent =  "You Lose! Paper beats Rock";
+        }    
     }
     else if (computerSelection == "Scissors" && playerSelection == "Paper") {
         ++computerScoreValue;
         updateDisplayedScores();
-        checkGameWinner();
-        resultDisplayGroup.textContent =  "You Lose! Scissors beats Paper";
+        if (!(checkGameWinner())) {
+           resultDisplayGroup.textContent =  "You Lose! Scissors beats Paper";
+        }
+        
     }
 
     //else {
@@ -91,18 +102,17 @@ function playRound(playerSelection, computerSelection = getComputerChoice()) {
 function checkGameWinner() {
     if (playerScoreValue > 4) {
         resultDisplayGroup.textContent = 'The player wins!';
-
-        rockButtonSelection.removeEventListener('click', function() {playRound('Rock'); });
-        paperButtonSelection.removeEventListener('click', function() {playRound('Paper'); });
-        scissorsButtonSelection.removeEventListener('click', function() {playRound('Scissors'); });
-    
+        rockButtonSelection.removeEventListener('click', playRock);
+        paperButtonSelection.removeEventListener('click', playPaper);
+        scissorsButtonSelection.removeEventListener('click', playScissors);
+        return true;
     }
     else if (computerScoreValue > 4) {
         resultDisplayGroup.textContent = 'The computer wins!';
-    
-        rockButtonSelection.removeEventListener('click', function() {playRound('Rock'); });
-        paperButtonSelection.removeEventListener('click', function() {playRound('Paper'); });
-        scissorsButtonSelection.removeEventListener('click', function() {playRound('Scissors'); });
-
+        rockButtonSelection.removeEventListener('click', playRock);
+        paperButtonSelection.removeEventListener('click', playPaper);
+        scissorsButtonSelection.removeEventListener('click', playScissors);
+        return true;
     }
+    return false;
 }
